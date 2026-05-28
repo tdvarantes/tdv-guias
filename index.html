@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exchange + Teams — Della Volpe Transportes</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #EBEBEA; font-family: Arial, sans-serif; padding: 24px 16px; }
+.email-wrap { max-width: 660px; margin: 0 auto; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.10); }
+
+/* HEADER */
+.header { background: linear-gradient(135deg, #C45000 0%, #E56606 60%, #FF8C2A 100%); padding: 32px 40px 28px; position: relative; overflow: hidden; }
+.header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: rgba(255,255,255,0.07); border-radius: 50%; }
+.header::after { content: ''; position: absolute; bottom: -40px; left: 20px; width: 130px; height: 130px; background: rgba(255,255,255,0.04); border-radius: 50%; }
+.logo-area { margin-bottom: 22px; position: relative; z-index: 1; }
+.logo-area img { height: 38px; filter: brightness(0) invert(1); }
+.badge-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; position: relative; z-index: 1; }
+.badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 12px; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+.header h1 { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; position: relative; z-index: 1; }
+.header p { color: rgba(255,255,255,0.85); font-size: 13px; line-height: 1.6; max-width: 480px; position: relative; z-index: 1; }
+
+/* BODY */
+.body { padding: 32px 40px; }
+
+.highlight { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; margin-bottom: 28px; }
+.hl-icon { width: 36px; height: 36px; background: #E56606; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.highlight h4 { font-size: 13px; font-weight: 700; color: #1E3A5F; margin-bottom: 3px; }
+.highlight p { font-size: 12px; color: #374151; line-height: 1.6; }
+
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.sec-icon.ex { background: #DBEAFE; }
+.sec-icon.tm { background: #EDE9FE; }
+.sec-title { font-size: 15px; font-weight: 700; color: #111827; }
+.sec-sub { font-size: 11px; color: #6B7280; margin-top: 2px; }
+
+/* GRID */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 26px; }
+.feat-card { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 11px; padding: 14px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; }
+.feat-card:hover { border-color: #0078D4; background: #EFF6FF; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,120,212,0.12); }
+.feat-top { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+.fi { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.fi.b { background: #DBEAFE; }
+.fi.p { background: #EDE9FE; }
+.fi.g { background: #D1FAE5; }
+.fi.a { background: #FEF3C7; }
+.feat-card h4 { font-size: 12px; font-weight: 700; color: #111827; }
+.feat-card p { font-size: 11px; color: #6B7280; line-height: 1.55; margin-top: 3px; }
+.feat-hint { font-size: 10px; color: #0078D4; font-weight: 600; margin-top: 6px; display: flex; align-items: center; gap: 3px; }
+
+.divider { height: 1px; background: #F3F4F6; margin: 4px 0 26px; }
+
+.footer-green { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 12px; padding: 16px 18px; display: flex; gap: 14px; align-items: flex-start; }
+.fg-icon { width: 34px; height: 34px; background: #059669; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.footer-green h4 { font-size: 13px; font-weight: 700; color: #064E3B; margin-bottom: 3px; }
+.footer-green p { font-size: 12px; color: #374151; line-height: 1.5; }
+
+.foot { background: #F9FAFB; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #F3F4F6; }
+.foot p { font-size: 11px; color: #9CA3AF; }
+.foot span { font-size: 11px; font-weight: 700; color: #0078D4; }
+
+/* MODAL */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.55); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: #fff; border-radius: 16px; max-width: 480px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25); animation: popIn 0.2s ease; }
+@keyframes popIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-header { padding: 24px 24px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.modal-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.modal-header-text h2 { font-size: 17px; font-weight: 700; color: #111827; margin-bottom: 3px; }
+.modal-header-text p { font-size: 12px; color: #6B7280; line-height: 1.5; }
+.modal-close { background: #F3F4F6; border: none; border-radius: 8px; width: 30px; height: 30px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #6B7280; }
+.modal-close:hover { background: #E5E7EB; }
+.modal-body { padding: 20px 24px 24px; }
+.step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+.step-num { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; color: #fff; }
+.step-num.blue { background: #0078D4; }
+.step-num.purple { background: #7C3AED; }
+.step-num.green { background: #059669; }
+.step-num.orange { background: #E56606; }
+.step h4 { font-size: 13px; font-weight: 700; color: #111827; margin-bottom: 3px; }
+.step p { font-size: 12px; color: #4B5563; line-height: 1.55; }
+.step-illus { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; font-size: 12px; color: #374151; line-height: 1.6; }
+.step-illus strong { color: #0078D4; }
+.tip-box { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 10px; padding: 12px 14px; font-size: 12px; color: #92400E; line-height: 1.6; margin-top: 8px; }
+.tip-box strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div style="display:flex;align-items:flex-start;gap:12px;">
+        <div class="modal-icon" id="m-icon"></div>
+        <div class="modal-header-text">
+          <h2 id="m-title"></h2>
+          <p id="m-sub"></p>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="m-body"></div>
+  </div>
+</div>
+
+<!-- EMAIL -->
+<div class="email-wrap">
+
+  <div class="header">
+    <div class="logo-area">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyODQgODQuOTIiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO30uY2xzLTJ7ZmlsbDojODU4NTg0O30uY2xzLTN7ZmlsbDojZTU2NjA2O30uY2xzLTR7ZmlsbDojZmZlYzAwO30uY2xzLTV7ZmlsbDojNmY3MjcxO308L3N0eWxlPjwvZGVmcz48ZyBpZD0iQ2FtYWRhXzIiIGRhdGEtbmFtZT0iQ2FtYWRhIDIiPjxnIGlkPSJQw4FHSU5BUyI+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTE2LjkzLDM3LjE2YTMuMTYsMy4xNiwwLDAsMC0uNTEuNzIsMS4wOSwxLjA5LDAsMCwwLS4wOCwxLjE3LDEsMSwwLDAsMCwuNTkuMzYsMywzLDAsMCwwLC42NS4wNyw1LjY0LDUuNjQsMCwwLDAsMS42Ni0uMjksMTIuNzMsMTIuNzMsMCwwLDAsMi0uODhsMS44OS0zLjU3YTE0LjczLDE0LjczLDAsMCwwLTQuMzcsMS4xNEE1Ljc5LDUuNzksMCwwLDAsMTE2LjkzLDM3LjE2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTgwLjcyLDMyLjE5bC4yNy0uNWEzLjYzLDMuNjMsMCwwLDAsLjYxLTIuMzZxLS4yMS0uNzgtMS40Ny0uNzhhNCw0LDAsMCwwLTEuNDkuMjksNC4yNiw0LjI2LDAsMCwwLS44NS40OSw2LjkyLDYuOTIsMCwwLDAtMS44OCwyLjM2bC0uMjcuNWg1LjA4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE5NC4wNywzOS40MWEzLjE0LDMuMTQsMCwwLDAsMi4yMi0uOTQsNC41Myw0LjUzLDAsMCwwLC40My0uNDksMjQuNjMsMjQuNjMsMCwwLDAsMi4yMS0zLjYyLDEyLjksMTIuOSwwLDAsMCwxLjY2LTRjMC0uNjQtLjM5LTEtMS4yMi0xYTMuMTQsMy4xNCwwLDAsMC0yLjIzLjkzYy0uMTMuMTMtLjI3LjI5LS40Mi40N2EyMy43OSwyMy43OSwwLDAsMC0yLjIsMy42LDEzLjQyLDEzLjQyLDAsMCwwLTEuNjcsNC4wNkMxOTIuODMsMzkuMDcsMTkzLjIzLDM5LjQxLDE5NC4wNywzOS40MVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNjEuMjIsMzMuNzZsLS40NS44NmMtMS4wNywyLTEuNTksMy4zLTEuNTYsMy44M3MuNDYuNzksMS4yOC43OWEzLjQ4LDMuNDgsMCwwLDAsMS4xOC0uMiwzLjE2LDMuMTYsMCwwLDAsMS4wNi0uNjUsMTcuNjQsMTcuNjQsMCwwLDAsMi42OC00LjE0YzEuMTItMi4xMiwxLjY3LTMuNDksMS42Ni00LjA4cy0uNDQtLjkxLTEuMzItLjkxYTMsMywwLDAsMC0yLjEuNzksMTIuMDUsMTIuMDUsMCwwLDAtMiwyLjg3QzE2MS41MywzMy4xOSwxNjEuMzcsMzMuNDYsMTYxLjIyLDMzLjc2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIyMi4yNywzMi4xOWwuMjYtLjVhMy41OSwzLjU5LDAsMCwwLC42Mi0yLjM2Yy0uMTMtLjUyLS42My0uNzgtMS40Ni0uNzhhNCw0LDAsMCwwLTEuNS4yOSw0LjU2LDQuNTYsMCwwLDAtLjg1LjQ5LDYuOTIsNi45MiwwLDAsMC0xLjg4LDIuMzZsLS4yNy41aDUuMDhaIi8+PHBvbHlnb24gY2xhc3M9ImNscy0yIiBwb2ludHM9Ijg0Ljk1IDQzLjU3IDg2LjY3IDQzLjU3IDkyLjE0IDQzLjU3IDEwMS4zMSAyNi4yIDEwNi4yMSAxNi45MSAxMDEuMzEgMTYuOTEgOTkuMDIgMTYuOTEgODYuNjcgNDAuMzIgODQuOTUgNDMuNTciLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik02Ny40NiwzNC4yNWMtMS44MywzLjQ4LTIuMzgsNi0xLjY2LDcuNDlTNjguNjIsNDQsNzIuMDcsNDRhMTYuNDgsMTYuNDgsMCwwLDAsNi41Ny0xLjI1Yy4zMy0uMTQuNjQtLjI5LDEtLjQ1YTEyLjExLDEyLjExLDAsMCwwLDUtNC45MWwtNiwwaC0uNzlBNC4yOCw0LjI4LDAsMCwxLDc2LjQxLDM5YTMuODUsMy44NSwwLDAsMS0yLC41MWMtLjkzLDAtMS40Ny0uMjQtMS42My0uNzJhMy40OCwzLjQ4LDAsMCwxLC42My0yLjM0YzAtLjA5LjE0LS4yNS4yNi0uNDVhMy44NSwzLjg1LDAsMCwwLC4yNy0uNDhIODUuNjRsLjA5LS4xM2MuNDQtLjcxLjc1LTEuMjQuOTQtMS42bDAtLjA3YzEuNjUtMy4xMiwyLjA4LTUuNDQsMS4zMi03YTMuMzQsMy4zNCwwLDAsMC0xLjM2LTEuMzhBOS40OSw5LjQ5LDAsMCwwLDgyLDI0LjQ3YTE3LjQxLDE3LjQxLDAsMCwwLTMuMzguMzEsMTMuNjMsMTMuNjMsMCwwLDAtNSwyQTIwLDIwLDAsMCwwLDY3LjQ2LDM0LjI1Wm04LjQ1LTIuNTZhNi45Miw2LjkyLDAsMCwxLDEuODgtMi4zNiw0LjI2LDQuMjYsMCwwLDEsLjg1LS40OSw0LDQsMCwwLDEsMS40OS0uMjlxMS4yNiwwLDEuNDcuNzhBMy42MywzLjYzLDAsMCwxLDgxLDMxLjY5bC0uMjcuNUg3NS42NFoiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iOTYuNCA0My41NyAxMDEuMzEgNDMuNTcgMTAzLjU5IDQzLjU3IDExMy4wNCAyNS42NyAxMTYuOTMgMTguMjkgMTE3LjY2IDE2LjkxIDExNi45MyAxNi45MSAxMTMuMDQgMTYuOTEgMTEwLjQ3IDE2LjkxIDEwMS4zMSAzNC4yOCA5Ni40IDQzLjU3Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTE0LjYsMzAuMTJoNi40OGEyLjgxLDIuODEsMCwwLDEsMS4yMS0xLDQuNDcsNC40NywwLDAsMSwxLjgxLS4zM2MuNzUsMCwxLjIyLjE2LDEuNDIuNXMuMTIuODctLjI1LDEuNTZjLS4wOC4xNi0uMTYuMjgtLjIyLjM4YTIsMiwwLDAsMS0uMTYuMjQsMzQuOTIsMzQuOTIsMCwwLDAtOCwxLjQ0LDE5LjQzLDE5LjQzLDAsMCwwLTIuMTYuODIsMTQuODUsMTQuODUsMCwwLDAtMS43My45MywxMC4zMiwxMC4zMiwwLDAsMC0zLjgxLDMuOTRjLS45MSwxLjcyLTEuMDYsMy4wNS0uNDYsNFMxMTAuNjYsNDQsMTEyLjY0LDQ0aC40YTEwLjEsMTAuMSwwLDAsMCwzLS42NmMuMy0uMTEuNTktLjIzLjg5LS4zNmExNy40MiwxNy40MiwwLDAsMCwyLjY5LTEuNTZsLS43MSwyLjEzaDYuNzdjLjEtLjMuMjItLjYyLjM2LTFhMTEsMTEsMCwwLDEsLjU0LTEuMWw1LjA5LTkuNjVxMi0zLjc4LjcxLTUuNTl0LTUuOTItMS44MWExNi42OCwxNi42OCwwLDAsMC03LjE5LDEuNDQsMTEuMTksMTEuMTksMCwwLDAtMi4zNCwxLjQ4QTEwLjA1LDEwLjA1LDAsMCwwLDExNC42LDMwLjEyWm02LjY3LDguMTlhMTIuNzMsMTIuNzMsMCwwLDEtMiwuODgsNS42NCw1LjY0LDAsMCwxLTEuNjYuMjksMywzLDAsMCwxLS42NS0uMDcsMSwxLDAsMCwxLS41OS0uMzYsMS4wOSwxLjA5LDAsMCwxLC4wOC0xLjE3LDMuMTYsMy4xNiwwLDAsMSwuNTEtLjcyLDUuNzksNS43OSwwLDAsMSwxLjg2LTEuMjgsMTQuNzMsMTQuNzMsMCwwLDEsNC4zNy0xLjE0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE1OS45LDI2Ljc5YTIwLDIwLDAsMCwwLTYuMTgsNy40NmMtMS44LDMuNDMtMi4zNyw1LjkxLTEuNjksNy40NlMxNTQuNjksNDQsMTU4LDQ0YTE4LjI0LDE4LjI0LDAsMCwwLDMuNzEtLjM2LDEzLjI0LDEzLjI0LDAsMCwwLDQuNzItMiwxOS44NywxOS44NywwLDAsMCw2LjE4LTcuNDdjLjExLS4yLjIxLS40MS4zMS0uNiwxLjU3LTMuMTMsMi01LjQxLDEuMzgtNi44N2EzLDMsMCwwLDAtMS4zOC0xLjQ0LDkuNjUsOS42NSwwLDAsMC00LjYtLjg3LDE1LjYxLDE1LjYxLDAsMCwwLTYuNjEsMS4zM0ExNCwxNCwwLDAsMCwxNTkuOSwyNi43OVptMy43NSwzLjI2YTMsMywwLDAsMSwyLjEtLjc5Yy44OCwwLDEuMzEuMywxLjMyLjkxcy0uNTQsMi0xLjY2LDQuMDhhMTcuNjQsMTcuNjQsMCwwLDEtMi42OCw0LjE0LDMuMTYsMy4xNiwwLDAsMS0xLjA2LjY1LDMuNDgsMy40OCwwLDAsMS0xLjE4LjJjLS44MiwwLTEuMjUtLjI2LTEuMjgtLjc5cy40OS0xLjgxLDEuNTYtMy44M2wuNDUtLjg2Yy4xNS0uMy4zMS0uNTcuNDUtLjg0QTEyLjA1LDEyLjA1LDAsMCwxLDE2My42NSwzMC4wNVoiLz48cG9seWdvbiBjbGFzcz0iY2xzLTMiIHBvaW50cz0iMTcxLjIyIDQzLjU3IDE3Mi44OCA0My41NyAxNzguNCA0My41NyAxODUuNzEgMjkuNzIgMTkyLjQ3IDE2LjkxIDE4NS43MSAxNi45MSAxODUuMjggMTYuOTEgMTcyLjg4IDQwLjQyIDE3MS4yMiA0My41NyIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTE2MS42NywyMGwyLjQ2LTMuMDZoLTcuOGwtOS40OCwxMi43NWMtLjQxLjU3LS44MywxLjE5LTEuMjYsMS44M3MtLjg3LDEuMzctMS4zNSwyLjE2aC0uNDVjLjM3LS44My42OS0xLjU4LjkzLTIuMjJzLjQ1LTEuMjIuNjEtMS43N2w0LTEyLjc1aC03Ljg1bC02LjgzLDI2LjY2aDhaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMTg1LjcxLDM3LjYsMTc5LDUwLjQxaDcuMDlMMTkxLDQxLjA4YTIuNzMsMi43MywwLDAsMCwxLjA4LDIuMSw0LjcxLDQuNzEsMCwwLDAsMi43OC42OSw4LjA4LDguMDgsMCwwLDAsMS44OS0uMjMsOS44NCw5Ljg0LDAsMCwwLDQuMDYtMi4yM0EyNS42OSwyNS42OSwwLDAsMCwyMDYuMjMsMzRhMjQuMTIsMjQuMTIsMCwwLDAsMS40NC0zLjE5LDcuNzksNy43OSwwLDAsMCwuNTYtMy43OCwyLjg1LDIuODUsMCwwLDAtLjU2LTEuMzUsMy41NCwzLjU0LDAsMCwwLTIuOTQtMS4wOCw4LjQxLDguNDEsMCwwLDAtMy42Ljc4LDEyLjU0LDEyLjU0LDAsMCwwLTMuNDEsMi41bDEuNTMtMi45MUgxOTIuNFptOC44MS0zLjI0YTIzLjc5LDIzLjc5LDAsMCwxLDIuMi0zLjZjLjE1LS4xOC4yOS0uMzQuNDItLjQ3YTMuMTQsMy4xNCwwLDAsMSwyLjIzLS45M2MuODMsMCwxLjIzLjMyLDEuMjIsMWExMi45LDEyLjksMCwwLDEtMS42Niw0QTI0LjYzLDI0LjYzLDAsMCwxLDE5Ni43MiwzOGE0LjUzLDQuNTMsMCwwLDEtLjQzLjQ5LDMuMTQsMy4xNCwwLDAsMS0yLjIyLjk0Yy0uODQsMC0xLjI0LS4zNC0xLjIyLTFBMTMuNDIsMTMuNDIsMCwwLDEsMTk0LjUyLDM0LjM2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTIxNS4yMSwzNmMuMTMtLjIxLjIyLS4zNi4yOC0uNDhoMTEuN2wuMDktLjEzYy40Ny0uNzYuOC0xLjMxLDEtMS42NywxLjY1LTMuMTIsMi4wOC01LjQ0LDEuMzItN3MtMi43Ny0yLjI5LTYtMi4yOWExNy40OCwxNy40OCwwLDAsMC0zLjM4LjMxLDEzLjU4LDEzLjU4LDAsMCwwLTUsMkExOS43OSwxOS43OSwwLDAsMCwyMDksMzQuMjVhMjIuNDYsMjIuNDYsMCwwLDAtMS4zNSwzcS0xLjA2LDMtLjMxLDQuNTFhMiwyLDAsMCwwLC4zMS41cTEuMzgsMS43OCw2LDEuNzlhMTYuNDgsMTYuNDgsMCwwLDAsNi41Ny0xLjI1Yy4zMy0uMTQuNjQtLjI5Ljk1LS40NWExMi4xMSwxMi4xMSwwLDAsMCw1LTQuOTFsLTYsMGgtLjc5QTQuMjgsNC4yOCwwLDAsMSwyMTgsMzlhMy44MiwzLjgyLDAsMCwxLTIsLjUxcS0xLjM5LDAtMS42Mi0uNzJhMy41MSwzLjUxLDAsMCwxLC42Mi0yLjM0Wm0yLjI1LTQuMzFhNi45Miw2LjkyLDAsMCwxLDEuODgtMi4zNiw0LjU2LDQuNTYsMCwwLDEsLjg1LS40OSw0LDQsMCwwLDEsMS41LS4yOWMuODMsMCwxLjMzLjI2LDEuNDYuNzhhMy41OSwzLjU5LDAsMCwxLS42MiwyLjM2bC0uMjYuNWgtNS4wOFoiLz48cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik00OS41LDEuMTRDNjAsMTMuNiwzNS4yNCw0MC44Nyw0LDQ0LjExYzIxLjQxLTEsNDIuMzEtOS4yLDUyLjc3LTE4LjYzQzY2LjQzLDE2Ljc3LDY2LDUuNjQsNDkuNSwxLjE0WiIvPjxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTU0LjA2LDM2LjM3Yy0xLjM4LjY1LTIuODQsMS4yOS00LjM3LDEuODlDMzguNzYsNDIuNTgsMjAsNDUuNjIsNCw0NC4xMSwyNC4yMSw0Ni41NCw0Miw0Mi43MSw1NC4wNiwzNi4zN1oiLz48cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik00OS42OSwzOC4yNmMxLjUzLS42LDMtMS4yNCw0LjM3LTEuODlDNzcuNzIsMjUuMjMsNzkuNjksNy45LDQ5LjUsMS4xNCw2Niw1LjY0LDY2LjQzLDE2Ljc3LDU2Ljc3LDI1LjQ4LDQ2LjMxLDM0LjkxLDI1LjQxLDQzLjEyLDQsNDQuMTEsMjAsNDUuNjIsMzguNzYsNDIuNTgsNDkuNjksMzguMjZaIi8+PHBhdGggY2xhc3M9ImNscy0zIiBkPSJNMjUwLjc3LDU4Ljg1QzMwMyw0MS44LDMwMS42OSwxMi43NywxODguMzUsMGM2OS41NSw4LjYxLDc5LjI3LDMxLjE4LDQzLjU0LDQ3LjkyQzE5Ni43Niw2NC4zOCwxMTAuODcsODAuNjQsMCw4My43Niw5Ni4xOSw4OC44OSwxOTYuOSw3Ni40NCwyNTAuNzcsNTguODVaIi8+PC9nPjwvZz48L3N2Zz4=" alt="Della Volpe Transportes" />
+    </div>
+    <div class="badge-row">
+      <span class="badge">📧 Exchange Online</span>
+      <span class="badge">💬 Microsoft Teams</span>
+      <span class="badge">✨ Microsoft 365</span>
+    </div>
+    <h1>Novidade na Della Volpe:<br>Exchange + Teams chegaram!</h1>
+    <p>Conheça as principais funcionalidades das nossas novas ferramentas de comunicação e colaboração. Clique em cada item para ver um guia rápido.</p>
+  </div>
+
+  <div class="body">
+
+    <div class="highlight">
+      <div class="hl-icon">🚀</div>
+      <div>
+        <h4>Por que estamos migrando?</h4>
+        <p>Mais segurança, mobilidade e colaboração em tempo real — acesse e-mails, agenda e reuniões de qualquer lugar, em qualquer dispositivo.</p>
+      </div>
+    </div>
+    <div class="highlight" style="background:#FFF7ED;border-color:#FED7AA;margin-top:-14px;">
+      <div class="hl-icon" style="background:#E56606;">🌐</div>
+      <div>
+        <h4>Acesse seu e-mail pelo navegador</h4>
+        <p>Não precisa mais do webmail antigo. Use o endereço abaixo em qualquer computador ou celular:<br><a href="https://outlook.office.com/mail/" style="color:#E56606;font-weight:700;word-break:break-all;">https://outlook.office.com</a></p>
+      </div>
+    </div>
+
+    <!-- EXCHANGE -->
+    <div class="section-header">
+      <div class="sec-icon ex">📧</div>
+      <div>
+        <div class="sec-title">Exchange Online — E-mail corporativo</div>
+        <div class="sec-sub">Clique em cada card para ver o guia rápido</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <button class="feat-card" onclick="openModal('email')">
+        <div class="feat-top"><div class="fi b">📬</div><h4>E-mail corporativo</h4></div>
+        <p>Acesse seu e-mail pelo Outlook, navegador ou celular — em qualquer lugar.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('agenda')">
+        <div class="feat-top"><div class="fi g">📅</div><h4>Agenda compartilhada</h4></div>
+        <p>Veja a disponibilidade dos colegas e marque reuniões sem ligar.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('salas')">
+        <div class="feat-top"><div class="fi a">🏢</div><h4>Reserva de salas</h4></div>
+        <p>Reserve salas de reunião direto pelo Outlook sem papel nem conflitos.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('catalogo')">
+        <div class="feat-top"><div class="fi b">👥</div><h4>Catálogo de contatos</h4></div>
+        <p>Todos os colaboradores aparecem ao digitar um nome ou setor.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('organizacao')">
+        <div class="feat-top"><div class="fi g">📁</div><h4>Caixa organizada</h4></div>
+        <p>Regras automáticas e pastas inteligentes organizam seus e-mails.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('seguranca')">
+        <div class="feat-top"><div class="fi a">🔒</div><h4>Segurança avançada</h4></div>
+        <p>Spam vai direto para o Lixo Eletrônico — sem precisar acessar o webmail antigo.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- TEAMS -->
+    <div class="section-header">
+      <div class="sec-icon tm">💬</div>
+      <div>
+        <div class="sec-title">Microsoft Teams — Colaboração em equipe</div>
+        <div class="sec-sub">Clique em cada card para ver o guia rápido</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <button class="feat-card" onclick="openModal('chat')">
+        <div class="feat-top"><div class="fi p">💬</div><h4>Chat com colegas</h4></div>
+        <p>Mensagens rápidas individualmente ou em grupos — mais ágil que e-mail.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('video')">
+        <div class="feat-top"><div class="fi b">📹</div><h4>Reuniões em vídeo</h4></div>
+        <p>Videochamadas HD com compartilhamento de tela e gravação.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('arquivos')">
+        <div class="feat-top"><div class="fi g">📂</div><h4>Arquivos compartilhados</h4></div>
+        <p>Envie e edite documentos direto no Teams — sem anexos por e-mail.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('canais')">
+        <div class="feat-top"><div class="fi p">🏢</div><h4>Canais por setor</h4></div>
+        <p>Cada departamento tem seu espaço com conversas organizadas.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('celular')">
+        <div class="feat-top"><div class="fi a">📱</div><h4>Acesso pelo celular</h4></div>
+        <p>Instale o app e fique conectado com a equipe de qualquer lugar.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+      <button class="feat-card" onclick="openModal('notificacoes')">
+        <div class="feat-top"><div class="fi b">🔔</div><h4>Notificações inteligentes</h4></div>
+        <p>Receba alertas só do que importa — silencie e foque no trabalho.</p>
+        <div class="feat-hint">👆 Ver guia rápido →</div>
+      </button>
+    </div>
+
+    <div class="footer-green">
+      <div class="fg-icon">✅</div>
+      <div>
+        <h4>Precisa de ajuda?</h4>
+        <p>A equipe de TI está disponível para tirar dúvidas e auxiliar na configuração. Entre em contato pelo ramal da TI ou abra um chamado no sistema.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <p>Della Volpe Transportes — TI Corporativo · 2025</p>
+    <span>Microsoft 365 · Exchange + Teams</span>
+  </div>
+
+</div>
+
+<script>
+const manuals = {
+  email: {
+    icon: "📬", bg: "#DBEAFE", title: "E-mail corporativo",
+    sub: "Como acessar e usar seu e-mail @dellavolpe.com.br",
+    body: `
+      <div class="step-illus">Seu novo endereço: <strong>seunome@dellavolpe.com.br</strong><br>Acesse pelo Outlook instalado no computador, pelo site <strong>outlook.com</strong> ou pelo aplicativo no celular.</div>
+      <div class="step"><div class="step-num blue">1</div><div><h4>Abra o Outlook</h4><p>No computador, clique no ícone do Outlook na barra de tarefas ou no menu Iniciar.</p></div></div>
+      <div class="step"><div class="step-num blue">2</div><div><h4>Digite seu e-mail e senha</h4><p>Use seu e-mail corporativo <strong>seunome@dellavolpe.com.br</strong> e a senha fornecida pela TI.</p></div></div>
+      <div class="step"><div class="step-num blue">3</div><div><h4>Envie seu primeiro e-mail</h4><p>Clique em <strong>Novo Email</strong>, digite o destinatário, assunto e mensagem. Clique em <strong>Enviar</strong>.</p></div></div>
+      <div class="step"><div class="step-num blue">4</div><div><h4>Acesse pelo celular</h4><p>Baixe o app <strong>Microsoft Outlook</strong> na App Store ou Google Play e faça login com seu e-mail corporativo.</p></div></div>
+      <div class="tip-box"><strong>💡 Acesso via web:</strong> Acesse seu e-mail de qualquer computador pelo endereço <a href="https://outlook.office.com/mail/" style="color:#E56606;font-weight:700;">outlook.office.com</a> — basta fazer login com seu e-mail corporativo.</div>
+    `
+  },
+  agenda: {
+    icon: "📅", bg: "#D1FAE5", title: "Agenda compartilhada",
+    sub: "Como ver a disponibilidade dos colegas e marcar reuniões",
+    body: `
+      <div class="step-illus">Com a agenda compartilhada, você vê quando seus colegas estão <strong>livres ou ocupados</strong> antes de marcar uma reunião — sem precisar ligar.</div>
+      <div class="step"><div class="step-num green">1</div><div><h4>Abra o Calendário no Outlook</h4><p>Clique no ícone de calendário no menu lateral do Outlook.</p></div></div>
+      <div class="step"><div class="step-num green">2</div><div><h4>Crie um novo evento</h4><p>Clique em <strong>Novo Evento</strong> e escolha data e horário.</p></div></div>
+      <div class="step"><div class="step-num green">3</div><div><h4>Adicione os participantes</h4><p>No campo <strong>Convidados</strong>, digite o nome do colega. O Outlook mostrará automaticamente os horários livres.</p></div></div>
+      <div class="step"><div class="step-num green">4</div><div><h4>Envie o convite</h4><p>Clique em <strong>Enviar</strong>. Cada convidado receberá um e-mail para aceitar ou recusar.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Use o <strong>Assistente de Agendamento</strong> para ver a disponibilidade de todos os convidados ao mesmo tempo e escolher o melhor horário.</div>
+    `
+  },
+  salas: {
+    icon: "🏢", bg: "#FEF3C7", title: "Reserva de salas",
+    sub: "Como reservar uma sala de reunião pelo Outlook",
+    body: `
+      <div class="step-illus">As salas de reunião da Della Volpe têm um <strong>calendário próprio</strong>. Você reserva direto pelo Outlook — sem papelzinho nem conflito de horário.</div>
+      <div class="step"><div class="step-num orange">1</div><div><h4>Crie um novo evento no Calendário</h4><p>Abra o Outlook, vá em Calendário e clique em <strong>Novo Evento</strong>.</p></div></div>
+      <div class="step"><div class="step-num orange">2</div><div><h4>Clique em "Adicionar sala"</h4><p>No campo de local, clique em <strong>Buscar salas</strong> e escolha a sala disponível.</p></div></div>
+      <div class="step"><div class="step-num orange">3</div><div><h4>Verifique a disponibilidade</h4><p>O Outlook mostrará se a sala está livre no horário escolhido. Salas ocupadas aparecem em vermelho.</p></div></div>
+      <div class="step"><div class="step-num orange">4</div><div><h4>Envie o convite</h4><p>Clique em <strong>Enviar</strong>. A sala aceitará automaticamente se estiver disponível.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Se a sala recusar o convite, ela já está ocupada naquele horário. Escolha outro horário ou outra sala.</div>
+    `
+  },
+  catalogo: {
+    icon: "👥", bg: "#DBEAFE", title: "Catálogo de contatos",
+    sub: "Como encontrar qualquer colaborador da empresa",
+    body: `
+      <div class="step-illus">Todos os <strong>colaboradores da Della Volpe</strong> estão no catálogo. Basta digitar o nome, setor ou cargo e eles aparecem automaticamente.</div>
+      <div class="step"><div class="step-num blue">1</div><div><h4>Abra um novo e-mail</h4><p>No Outlook, clique em <strong>Novo Email</strong>.</p></div></div>
+      <div class="step"><div class="step-num blue">2</div><div><h4>Digite no campo "Para"</h4><p>Comece a digitar o nome do colega ou o nome do setor. Ex: "Financeiro" ou "João".</p></div></div>
+      <div class="step"><div class="step-num blue">3</div><div><h4>Selecione o contato</h4><p>Uma lista aparecerá com os contatos correspondentes. Clique no nome correto.</p></div></div>
+      <div class="step"><div class="step-num blue">4</div><div><h4>Busque no diretório completo</h4><p>Clique em <strong>Pesquisar no Diretório</strong> para ver informações como cargo, departamento e telefone.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Você também pode clicar no nome de qualquer remetente em um e-mail recebido para ver o perfil completo dele.</div>
+    `
+  },
+  organizacao: {
+    icon: "📁", bg: "#D1FAE5", title: "Caixa organizada",
+    sub: "Como usar pastas e regras para organizar seus e-mails",
+    body: `
+      <div class="step-illus">O Outlook permite criar <strong>pastas automáticas</strong> para organizar e-mails por remetente, assunto ou palavra-chave — sem precisar fazer nada manualmente.</div>
+      <div class="step"><div class="step-num green">1</div><div><h4>Crie uma pasta</h4><p>Clique com o botão direito em <strong>Caixa de Entrada</strong> → <strong>Nova Pasta</strong>. Dê um nome como "Financeiro" ou "Projetos".</p></div></div>
+      <div class="step"><div class="step-num green">2</div><div><h4>Crie uma regra automática</h4><p>Clique com o botão direito em um e-mail → <strong>Regras</strong> → <strong>Criar regra</strong>.</p></div></div>
+      <div class="step"><div class="step-num green">3</div><div><h4>Defina a condição</h4><p>Escolha: "E-mails de [remetente]" ou "Com [palavra] no assunto" → mover para a pasta criada.</p></div></div>
+      <div class="step"><div class="step-num green">4</div><div><h4>Ative a regra</h4><p>Clique em <strong>OK</strong>. A partir de agora, os e-mails serão organizados automaticamente.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Use a pasta <strong>Itens Fixados</strong> para manter e-mails importantes sempre visíveis no topo da caixa de entrada.</div>
+    `
+  },
+  seguranca: {
+    icon: "🔒", bg: "#FEF3C7", title: "Segurança do e-mail",
+    sub: "Como o Exchange protege seu e-mail automaticamente",
+    body: `
+      <div class="step-illus">O Exchange Online possui <strong>proteção automática</strong> contra spam, phishing e vírus. A TI configura tudo — você só precisa ficar atento aos avisos.</div>
+      <div class="step"><div class="step-num orange">1</div><div><h4>Spam agora fica no Lixo Eletrônico</h4><p>Não é mais necessário acessar o webmail antigo para verificar spams. Tudo aparece diretamente na pasta <strong>Lixo Eletrônico</strong> — tanto no app Outlook quanto pelo site.</p></div></div>
+      <div class="step"><div class="step-num orange">2</div><div><h4>Verifique o Lixo Eletrônico regularmente</h4><p>Acesse a pasta <strong>Lixo Eletrônico</strong> no menu lateral do Outlook. Se um e-mail legítimo foi parar lá, clique com o botão direito → <strong>Não é lixo eletrônico</strong>.</p></div></div>
+      <div class="step"><div class="step-num orange">3</div><div><h4>Identifique e-mails suspeitos</h4><p>E-mails externos aparecem com aviso <strong>"Externo"</strong>. Desconfie de e-mails pedindo senha ou dados. Antes de clicar em links, passe o mouse para ver o endereço real.</p></div></div>
+      <div class="step"><div class="step-num orange">4</div><div><h4>Reporte phishing</h4><p>Clique com o botão direito no e-mail suspeito → <strong>Relatar</strong> → <strong>Phishing</strong>. Isso ajuda a proteger todos da empresa.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Nunca compartilhe sua senha com ninguém — nem com a TI. A TI <strong>nunca pede senha por e-mail</strong>.</div>
+    `
+  },
+  chat: {
+    icon: "💬", bg: "#EDE9FE", title: "Chat com colegas",
+    sub: "Como enviar mensagens rápidas no Microsoft Teams",
+    body: `
+      <div class="step-illus">O chat do Teams é como um <strong>WhatsApp corporativo</strong> — mais rápido que e-mail para perguntas do dia a dia e conversas rápidas.</div>
+      <div class="step"><div class="step-num purple">1</div><div><h4>Abra o Teams</h4><p>Clique no ícone do Teams na barra de tarefas ou acesse <strong>teams.microsoft.com</strong> pelo navegador.</p></div></div>
+      <div class="step"><div class="step-num purple">2</div><div><h4>Inicie uma conversa</h4><p>Clique em <strong>Novo Chat</strong> (ícone de lápis), digite o nome do colega e escreva sua mensagem.</p></div></div>
+      <div class="step"><div class="step-num purple">3</div><div><h4>Crie um grupo</h4><p>No Novo Chat, adicione vários nomes para criar um grupo. Útil para equipes e projetos.</p></div></div>
+      <div class="step"><div class="step-num purple">4</div><div><h4>Use reações e respostas</h4><p>Passe o mouse sobre uma mensagem para reagir com emoji ou responder diretamente a ela.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Use <strong>@nome</strong> para notificar alguém específico em uma conversa em grupo. A pessoa receberá uma notificação especial.</div>
+    `
+  },
+  video: {
+    icon: "📹", bg: "#DBEAFE", title: "Reuniões em vídeo",
+    sub: "Como criar e participar de videochamadas no Teams",
+    body: `
+      <div class="step-illus">Com o Teams, você faz <strong>videochamadas com toda a equipe</strong> — com câmera, microfone, compartilhamento de tela e gravação automática.</div>
+      <div class="step"><div class="step-num blue">1</div><div><h4>Agende uma reunião</h4><p>No Teams, clique em <strong>Calendário</strong> → <strong>Nova Reunião</strong>. Adicione os participantes e envie o convite.</p></div></div>
+      <div class="step"><div class="step-num blue">2</div><div><h4>Entre na reunião</h4><p>No horário marcado, clique em <strong>Entrar</strong> na reunião. Ative câmera e microfone conforme preferir.</p></div></div>
+      <div class="step"><div class="step-num blue">3</div><div><h4>Compartilhe sua tela</h4><p>Clique no ícone de <strong>Compartilhar</strong> (retângulo com seta) para mostrar sua tela, uma janela ou um arquivo.</p></div></div>
+      <div class="step"><div class="step-num blue">4</div><div><h4>Grave a reunião</h4><p>Clique nos <strong>três pontos (...)</strong> → <strong>Iniciar gravação</strong>. A gravação fica disponível para todos após a reunião.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Use o botão <strong>Levantar a mão</strong> para pedir a palavra sem interromper quem está falando.</div>
+    `
+  },
+  arquivos: {
+    icon: "📂", bg: "#D1FAE5", title: "Arquivos compartilhados",
+    sub: "Como enviar e editar arquivos no Teams",
+    body: `
+      <div class="step-illus">No Teams, você pode <strong>enviar arquivos e editá-los em equipe</strong> ao mesmo tempo — sem precisar mandar e-mail com anexo e esperar resposta.</div>
+      <div class="step"><div class="step-num green">1</div><div><h4>Envie um arquivo no chat</h4><p>Em qualquer conversa, clique no clipe 📎 ou arraste o arquivo para o chat. O colega pode abrir diretamente.</p></div></div>
+      <div class="step"><div class="step-num green">2</div><div><h4>Acesse os arquivos do canal</h4><p>Em um canal, clique na aba <strong>Arquivos</strong> para ver todos os documentos da equipe em um só lugar.</p></div></div>
+      <div class="step"><div class="step-num green">3</div><div><h4>Edite junto com a equipe</h4><p>Clique em um arquivo Word ou Excel — ele abre direto no Teams e várias pessoas podem editar ao mesmo tempo.</p></div></div>
+      <div class="step"><div class="step-num green">4</div><div><h4>Organize em pastas</h4><p>Na aba Arquivos, clique em <strong>Nova Pasta</strong> para organizar os documentos por projeto ou assunto.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Os arquivos ficam salvos automaticamente no <strong>SharePoint</strong> — sem risco de perder nada se o computador travar.</div>
+    `
+  },
+  canais: {
+    icon: "🏢", bg: "#EDE9FE", title: "Canais por setor",
+    sub: "Como usar os canais de cada departamento",
+    body: `
+      <div class="step-illus">Os <strong>canais</strong> são espaços organizados por equipe ou assunto — como uma sala virtual para cada departamento da Della Volpe.</div>
+      <div class="step"><div class="step-num purple">1</div><div><h4>Acesse sua equipe</h4><p>No menu lateral do Teams, clique em <strong>Equipes</strong>. Você verá as equipes e canais do seu setor.</p></div></div>
+      <div class="step"><div class="step-num purple">2</div><div><h4>Escolha o canal certo</h4><p>Cada assunto tem seu canal. Ex: <strong>Geral</strong> para avisos, <strong>Projetos</strong> para discussões específicas.</p></div></div>
+      <div class="step"><div class="step-num purple">3</div><div><h4>Poste uma mensagem</h4><p>Clique em <strong>Nova Conversa</strong> na parte inferior. Todos do canal verão sua mensagem.</p></div></div>
+      <div class="step"><div class="step-num purple">4</div><div><h4>Responda em thread</h4><p>Clique em <strong>Responder</strong> abaixo de uma mensagem para manter a conversa organizada.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Use <strong>@Canal</strong> para notificar todos os membros de uma vez sobre algo importante.</div>
+    `
+  },
+  celular: {
+    icon: "📱", bg: "#FEF3C7", title: "Acesso pelo celular",
+    sub: "Como instalar e usar o Teams e Outlook no smartphone",
+    body: `
+      <div class="step-illus">Com os apps no celular, você fica conectado com a equipe <strong>de qualquer lugar</strong> — mesmo fora do escritório ou em viagem.</div>
+      <div class="step"><div class="step-num orange">1</div><div><h4>Baixe os aplicativos</h4><p>Na App Store (iPhone) ou Google Play (Android), busque por <strong>Microsoft Teams</strong> e <strong>Microsoft Outlook</strong>. São gratuitos.</p></div></div>
+      <div class="step"><div class="step-num orange">2</div><div><h4>Faça login</h4><p>Abra o app e insira seu e-mail corporativo <strong>seunome@dellavolpe.com.br</strong> e sua senha.</p></div></div>
+      <div class="step"><div class="step-num orange">3</div><div><h4>Ative notificações</h4><p>Permita as notificações para receber avisos de mensagens e e-mails importantes em tempo real.</p></div></div>
+      <div class="step"><div class="step-num orange">4</div><div><h4>Use normalmente</h4><p>Todas as funcionalidades — chat, reuniões, e-mail e agenda — estão disponíveis no celular.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Configure o <strong>modo silencioso</strong> fora do horário de trabalho para não ser incomodado. Vá em Configurações → Notificações → Silencioso.</div>
+    `
+  },
+  notificacoes: {
+    icon: "🔔", bg: "#DBEAFE", title: "Notificações inteligentes",
+    sub: "Como configurar alertas para receber só o que importa",
+    body: `
+      <div class="step-illus">O Teams permite <strong>personalizar as notificações</strong> para você ser avisado apenas sobre o que realmente importa — sem distrações desnecessárias.</div>
+      <div class="step"><div class="step-num blue">1</div><div><h4>Acesse as configurações</h4><p>No Teams, clique nos três pontos <strong>(...)</strong> ao lado do seu nome → <strong>Configurações</strong> → <strong>Notificações</strong>.</p></div></div>
+      <div class="step"><div class="step-num blue">2</div><div><h4>Configure por tipo</h4><p>Escolha quais eventos te notificam: menções, mensagens diretas, reuniões. Desative o que não é prioritário.</p></div></div>
+      <div class="step"><div class="step-num blue">3</div><div><h4>Silencie um canal</h4><p>Clique com o botão direito no canal → <strong>Silenciar canal</strong>. Você ainda vê as mensagens, mas não recebe alertas.</p></div></div>
+      <div class="step"><div class="step-num blue">4</div><div><h4>Ative o Não Perturbe</h4><p>Clique na sua foto → mude o status para <strong>Não Perturbe</strong> quando precisar de foco total.</p></div></div>
+      <div class="tip-box"><strong>💡 Dica:</strong> Mensagens com <strong>@seunome</strong> sempre chegam como notificação prioritária — mesmo com o canal silenciado.</div>
+    `
+  }
+};
+
+function openModal(key) {
+  const m = manuals[key];
+  document.getElementById("m-icon").innerHTML = m.icon;
+  document.getElementById("m-icon").style.background = m.bg;
+  document.getElementById("m-title").textContent = m.title;
+  document.getElementById("m-sub").textContent = m.sub;
+  document.getElementById("m-body").innerHTML = m.body;
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("modal").addEventListener("click", function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeModal();
+});
+</script>
+</body>
+</html>
